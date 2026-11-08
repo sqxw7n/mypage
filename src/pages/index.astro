@@ -318,7 +318,8 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Demo', code: 'Code' } a
     /* 两栏：左侧栏随页面居中，并粘在视野里 */
     .page {
       display: grid;
-      grid-template-columns: 190px minmax(0, 1fr);
+      /* 左栏宽度 = 内容本身的宽度（不多留空），这样整体在视觉上居中 */
+      grid-template-columns: max-content minmax(0, 1fr);
       gap: 52px;
     }
     .side {
