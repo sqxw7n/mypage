@@ -1,0 +1,110 @@
+# ─────────────────────────────────────────────────────────────
+# 论文列表（Selected Works）。新论文加在最上面，复制一段改改就行。
+#
+#   id:      唯一的英文短名（随便起，不重复即可）
+#   title:   论文标题
+#   authors: 作者，用英文逗号分隔；"Qixin Wang" 会自动加粗
+#   venue:   会议 / 期刊简称（显示成小标签）
+#   year:    年份
+#   status:  可选，如 "To appear" / "Accepted"
+#   image:   可选，配图文件名，放在 src/assets/papers/ 里
+#   links:   可选，有哪个写哪个
+#     paper:   论文页面（DOI / arXiv / 出版社）
+#     pdf:     PDF 文件名，放在 public/papers/ 里；或直接写完整网址
+#     project: 项目 / Demo 页面
+#     code:    代码 / 数据集
+# ─────────────────────────────────────────────────────────────
+
+- id: ncmmsc2025-vision-accessible
+  title: Research on Vision Accessible System for Blind and Low-vision People
+  authors: Qixin Wang, Songtao Zhou, Zeyu Jin, Shikun Sun, Qinghuan Lan, Chenglin Guo, Xiaoyu Qin
+  venue: NCMMSC 2025
+  year: 2025
+  status: Accepted
+
+- id: harmonivox
+  title: "HarmoniVox: Painting Voices to Match the Avatar's Soul"
+  authors: Songtao Zhou, Xiaoyu Qin, Yixuan Zhou, Qixin Wang, Zeyu Jin, Zixuan Wang, Zhiyong Wu, Jia Jia
+  venue: ACM MM 2025
+  year: 2025
+  links:
+    project: https://harmonivox.github.io/harmonivox/
+
+- id: v-cass
+  title: "V-CASS: Vision-context-aware Expressive Speech Synthesis for Enhancing User Understanding of Videos"
+  authors: Qixin Wang, Songtao Zhou, Zeyu Jin, Chenglin Guo, Shikun Sun, Xiaoyu Qin
+  venue: IJCNN 2025
+  year: 2025
+  image: V-CASS.jpg
+  links:
+    paper: https://arxiv.org/abs/2506.16716
+    pdf: v-cass-ijcnn2025.pdf
+    project: https://v-cass.github.io/V-CASS/
+
+- id: ncmmsc2024-emotional-speech
+  title: Emotional Speech Synthesis via Visual Context Perception
+  authors: Qixin Wang, Chenglin Guo, Songtao Zhou, Xiaoyu Qin
+  venue: NCMMSC 2024
+  year: 2024
+  status: Oral
+  image: nc2024.jpg
+  links:
+    pdf: emotional-speech-ncmmsc2024.pdf
+
+- id: speechcraft
+  title: "SpeechCraft: A Fine-grained Expressive Speech Dataset with Natural Language Description"
+  authors: Zeyu Jin, Jia Jia, Qixin Wang, Kehan Li, Shuoyi Zhou, Songtao Zhou, Xiaoyu Qin, Zhiyong Wu
+  venue: ACM MM 2024
+  year: 2024
+  image: speechcraft.jpg
+  links:
+    paper: https://dl.acm.org/doi/abs/10.1145/3664647.3681674
+    pdf: speechcraft-mm2024.pdf
+    project: https://speechcraft2024.github.io/speechcraft2024/
+    code: https://github.com/thuhcsi/SpeechCraft/
+
+- id: soulskipper
+  title: "SoulSkipper: A Voice-Controlled Emotional Adaptive Game to Complement Therapy for Social Anxiety Disorder"
+  authors: Xiaohan Li, Qixin Wang, Zishan Wang, Zeyu Jin, Jia Jia
+  venue: CHI EA 2024
+  year: 2024
+  image: sad.jpg
+  links:
+    paper: https://dl.acm.org/doi/10.1145/3613905.3650822
+    pdf: soulskipper-chiea2024.pdf
+
+- id: holosinger
+  title: "HoloSinger: Semantics and Music Driven Motion Generation with Octahedral Holographic Projection"
+  authors: Zeyu Jin, Zixuan Wang, Qixin Wang, Jia Jia, Ye Bai, Yi Zhao, Hao Li, Xiaorui Wang
+  venue: ACM MM 2023
+  year: 2023
+  image: holosinger.jpg
+  links:
+    paper: https://dl.acm.org/doi/10.1145/3581783.3612674
+    pdf: holosinger-mm2023.pdf
+
+- id: asiahaptics2022
+  title: "Graphical Tactile Display Application: Design of Digital Braille Textbook and Initial Findings"
+  authors: Yang Jiao, Qixin Wang, Yingqing Xu
+  venue: AsiaHaptics 2022
+  year: 2022
+  status: Best Paper Finalist
+  image: asiahaptic.jpg
+  links:
+    paper: https://link.springer.com/chapter/10.1007/978-3-031-46839-1_10
+    pdf: tactile-display-asiahaptics2022.pdf
+
+- id: hhme2022
+  title: "Research on Haptic Graphic Displays: Digitized Braille Textbook Design"
+  authors: Yang Jiao, Qixin Wang, Yingqing Xu
+  venue: HHME-CHCI 2022
+  year: 2022
+  status: Poster · Best Paper Finalist
+  image: hhme.jpg
+
+- id: tasies2019
+  title: The Discussion on the Method about Using Interactive Installation Art in Psychotherapy
+  authors: Qixin Wang, Chong Cao, Jiayi Sun
+  venue: TASIES 2019
+  year: 2019
+  image: tasies.jpg

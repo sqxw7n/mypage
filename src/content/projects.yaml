@@ -1,0 +1,46 @@
+# ─────────────────────────────────────────────────────────────
+# 项目作品。点卡片会弹出详情，详情里的图片按顺序从上往下排。
+#
+#   id:          唯一的英文短名
+#   title:       项目名
+#   subtitle:    一句话介绍
+#   cover:       封面图文件名（src/assets/projects/ 里）
+#   images:      详情图片，按顺序列出（src/assets/projects/ 里；.gif 动图放在 public/projects/ 里）
+#   description: 可选，详情里的文字说明
+# ─────────────────────────────────────────────────────────────
+
+- id: freely-growing
+  title: Freely Growing
+  subtitle: An interactive installation art exploring stereotypes and limitations on women
+  cover: SG-0.jpg
+  images: [SG-0.jpg, SG-1.jpg, SG-2.jpg, SG-3.jpg, SG-4.jpg, SG-5.jpg, preview.gif]
+
+- id: see-smell-touch
+  title: See, Smell, and Touch the Music
+  subtitle: A multi-modal interactive room for hearing-impaired individuals
+  cover: SSTM-0.jpg
+  images: [SSTM-0.jpg, SSTM-1.jpg, SSTM-2.jpg, SSTM-3.jpg, SSTM-4.jpg, SSTM-5.jpg, SSTM-6.jpg]
+
+- id: eighth-continent
+  title: The Eighth Continent
+  subtitle: A simulated survival VR game calling for marine environment protection
+  cover: FB-0.jpg
+  images: [FB-0.jpg, FB-1.jpg, FB-2.jpg, FB-3.jpg, FB-4.jpg, FB-5.jpg, FB-6.jpg]
+
+- id: sharing-kitchen
+  title: Sharing Kitchen
+  subtitle: A service design project about a self-catering shared kitchen for families of patients
+  cover: HT-0.jpg
+  images: [HT-0.jpg, HT-1.jpg, HT-2.jpg, HT-3.jpg, HT-4.jpg, HT-5.jpg, HT-6.jpg]
+
+- id: app-design
+  title: Cultural Tourism Mini Program
+  subtitle: An immersive interactive WeChat Mini Program promoting Chinese culture and tourism
+  cover: APP-0.jpg
+  images: [APP-0.jpg, APP1-0.jpg, APP1-1.jpg, APP1-2.jpg, APP1-3.jpg, APP1-4.jpg, APP1-5.jpg, APP2-1.jpg, APP2-2.jpg, APP2-3.jpg, APP2-4.jpg, APP2-5.jpg]
+
+- id: brain-painting
+  title: Brain Painting Community
+  subtitle: Interactive design research for a brain-painting community installation
+  cover: EI-0.jpg
+  images: [EI-0.jpg, EI1-1.jpg, EI1-2.jpg, EI1-3.jpg, EI1-4.jpg, EI1-5.jpg, EI1-6.jpg]

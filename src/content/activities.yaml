@@ -1,0 +1,56 @@
+# ─────────────────────────────────────────────────────────────
+# 活动、获奖、展览、经历。新的加在对应分组的最上面。
+#
+#   id:    唯一的英文短名
+#   group: 分组，页面上按这个顺序显示：Awards / Exhibitions / Experience
+#   title: 内容
+#   date:  时间（随便写格式，如 "Nov. 2022"、"2023 – Present"）
+# ─────────────────────────────────────────────────────────────
+
+# ── Awards ──
+- id: thu-scholarship-2024
+  group: Awards
+  title: Second-Class Scholarship of Tsinghua University
+  date: Fall 2024
+
+- id: thu-scholarship-2023
+  group: Awards
+  title: Second-Class Scholarship of Tsinghua University
+  date: Fall 2023
+
+- id: asiahaptics-finalist
+  group: Awards
+  title: Best Paper Award Finalist, AsiaHaptics 2022
+  date: Nov. 2022
+
+- id: hhme-finalist
+  group: Awards
+  title: Best Paper Award Finalist, HHME-CHCI 2022
+  date: Sept. 2022
+
+- id: buaa-graduate
+  group: Awards
+  title: Outstanding Graduate Award of Beihang University
+  date: Jun. 2021
+
+- id: buaa-scholarship-2018
+  group: Awards
+  title: Second-Class Scholarship of Beihang University
+  date: Fall 2018
+
+- id: heed-2018
+  group: Awards
+  title: Excellent Paper Presentation, the 4th HEED International Collegiate Conference of China
+  date: May 2018
+
+# ── Exhibitions ──
+- id: dream-visualization
+  group: Exhibitions
+  title: Dream-Visualization Art Community — Asia Digital Art Exhibition; Taobao Maker Festival
+  date: 2022
+
+# ── Experience ──
+- id: thu-tech-service
+  group: Experience
+  title: Member, Technical Service Team, Tsinghua University
+  date: Mar. 2018 – Jun. 2023
