@@ -7,6 +7,7 @@ emails:                     # 可以写多个，第一个也用在顶栏的 Emai
   - siaqxwang@u.nus.edu
   - sharleneqxw@gmail.com
 scholar: https://scholar.google.com/citations?user=Cbf_E3oAAAAJ
+linkedin: https://www.linkedin.com/in/sqxw/
 cv: cv.pdf                  # 放在 public/ 里；留空则不显示 CV 按钮
 
 # ── 学历（从新到旧）──
@@ -27,10 +28,8 @@ education:
     years: 2017 – 2021
 ---
 
-I am a Ph.D. student in Electrical and Computer Engineering at the [National University of Singapore](https://nus.edu.sg).
+I am a first-year Ph.D. student in Electrical and Computer Engineering at the [National University of Singapore](https://nus.edu.sg). I have just begun exploring **affective avatars**, **human–computer interaction**, and **interaction in virtual reality** — how embodied, emotionally expressive agents and immersive environments can make human–computer interaction more natural, expressive, and engaging.
 
-My research lies at the intersection of **Human–Computer Interaction** and **Human-Centered AI**, with interests in technology-enhanced learning, learning analytics, multimodal learning interaction, accessibility, and data-driven education. Broadly, I explore how AI-driven multimodal perception and generation can enhance information access and user experience, toward inclusive and intelligent interactive systems.
+Before that, I received my master's degree from the [Department of Computer Science and Technology](https://www.cs.tsinghua.edu.cn/csen/) at [Tsinghua University](https://www.tsinghua.edu.cn/en/), advised by [Professor Jia Jia](https://hcsi.cs.tsinghua.edu.cn). My research there centered on human-centered AI and multimodal interaction, including vision-context-aware expressive speech synthesis, voice design for avatars, and accessibility. My master's thesis designed a video accessibility system for blind and low-vision (BLV) users based on multimodal agent collaboration.
 
-I received my master's degree from the [Department of Computer Science and Technology](https://www.cs.tsinghua.edu.cn/csen/) at [Tsinghua University](https://www.tsinghua.edu.cn/en/), advised by [Professor Jia Jia](https://hcsi.cs.tsinghua.edu.cn). My master's thesis designed a video accessibility system for blind and low-vision (BLV) users based on multimodal agent collaboration. I obtained my bachelor's degree from the [School of New Media Art and Design](https://art.buaa.edu.cn) at [Beihang University](https://www.buaa.edu.cn), advised by Professor Chong Cao.
-
-Alongside my computing background, I work in UI/UX research and design, VR/AR development, and interactive art — bridging engineering rigor with creative design perspectives.
+I hold a bachelor's degree from [Beihang University](https://www.buaa.edu.cn).

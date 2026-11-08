@@ -9,6 +9,7 @@ const about = defineCollection({
     photo: z.string(),
     emails: z.array(z.string()).default([]),
     scholar: z.string().url().optional(),
+    linkedin: z.string().url().optional(),
     cv: z.string().optional(),
     education: z.array(
       z.object({

@@ -54,6 +54,7 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' 
       <ul class="links">
         {me.emails.map((e) => <li><a href={`mailto:${e}`}>{e}</a></li>)}
         {me.scholar && <li><a href={me.scholar} target="_blank" rel="noopener">Google Scholar</a></li>}
+        {me.linkedin && <li><a href={me.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>}
         {cvHref && <li><a href={cvHref} target="_blank" rel="noopener">CV</a></li>}
       </ul>
       <nav class="menu" aria-label="Sections">
