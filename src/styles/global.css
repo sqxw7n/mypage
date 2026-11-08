@@ -3,12 +3,12 @@
 @import '@fontsource/tomorrow/400.css';
 @import '@fontsource/tomorrow/500.css';
 @import '@fontsource/tomorrow/600.css';
-/* 配色：极浅的紫色底（接近白，只隐约带一点紫），正文中性黑灰，只有重点文字（链接、当前菜单、标签）用紫色 */
+/* 配色：极浅的紫色底，灰色文字带一点紫调，重点文字（链接、当前菜单、标签、加粗关键词）用紫色 */
 :root {
-  --bg: #fdfcff;
+  --bg: #fbfaff;
   --fg: #1a1a1a;
-  --soft: #4a4a4a;
-  --muted: #8a8a8a;
+  --soft: #4b4560;
+  --muted: #8b85a2;
   --line: #ebe8f4;
   --ph: #f1eff8;
   --accent: #4b2fa0;

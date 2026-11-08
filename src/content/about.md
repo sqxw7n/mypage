@@ -31,4 +31,4 @@ I am a first-year Ph.D. student in Electrical and Computer Engineering at the [N
 
 Before that, I received my master's degree from the [Department of Computer Science and Technology](https://www.cs.tsinghua.edu.cn/csen/) at [Tsinghua University](https://www.tsinghua.edu.cn/en/), advised by [Professor Jia Jia](https://hcsi.cs.tsinghua.edu.cn). My research there centered on human-centered AI and multimodal interaction, including vision-context-aware expressive speech synthesis, voice design for avatars, and accessibility. My master's thesis designed a video accessibility system for blind and low-vision (BLV) users based on multimodal agent collaboration.
 
-I hold a bachelor's degree from [Beihang University](https://www.buaa.edu.cn).
+My path into interaction research began at [Beihang University](https://www.buaa.edu.cn), where I studied Digital Media Art and built VR experiences and interactive digital art. That hands-on work with immersive media still shapes my interest in how people feel, express, and connect in virtual spaces.
