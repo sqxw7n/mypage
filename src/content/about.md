@@ -8,6 +8,7 @@ emails:                     # 左侧栏显示为 "Email me"，用第一个
 scholar: https://scholar.google.com/citations?user=Cbf_E3oAAAAJ
 linkedin: https://www.linkedin.com/in/sqxw/
 cv: cv.pdf                  # 放在 public/ 里；留空则不显示 CV 按钮
+updated: "08/2026"           # 右上角 Last updated；删掉这行则自动用发布当月
 
 # ── 学历（从新到旧）──
 education:

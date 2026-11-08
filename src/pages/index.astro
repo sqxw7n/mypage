@@ -26,9 +26,9 @@ const authorsHtml = (s: string) =>
 const pdfHref = (pdf: string) => (/^https?:/.test(pdf) ? pdf : `${base}papers/${pdf}`);
 const cvHref = me.cv ? (/^https?:/.test(me.cv) ? me.cv : `${base}${me.cv}`) : '';
 
-// 右上角的更新时间：每次构建自动写入当月
+// 右上角的更新时间：about.md 里写了 updated 就用它，否则自动用发布当月
 const now = new Date();
-const lastUpdate = `${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
+const lastUpdate = me.updated ?? `${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
 
 const sections = [
   { id: 'about', label: 'About' },
@@ -402,7 +402,7 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Demo', code: 'Code' } a
   .end { height: 120px; } /* 页面底部留白 */
 
   /* 项目弹窗 */
-  .modal { position: fixed; inset: 0; z-index: 80; overflow-y: auto; background: rgba(20, 20, 20, 0.45); padding: 6vh var(--gutter); }
+  .modal { position: fixed; inset: 0; z-index: 80; overflow-y: auto; background: rgba(35, 24, 72, 0.45); padding: 6vh var(--gutter); }
   .modal[hidden] { display: none; }
   .modal-box { max-width: 900px; margin: 0 auto; background: #fff; }
   .modal-head {

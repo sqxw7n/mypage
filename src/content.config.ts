@@ -11,6 +11,7 @@ const about = defineCollection({
     scholar: z.string().url().optional(),
     linkedin: z.string().url().optional(),
     cv: z.string().optional(),
+    updated: z.coerce.string().optional(), // 右上角 Last updated 显示的日期，如 "08/2026"
     education: z.array(
       z.object({
         school: z.string(),
