@@ -3,9 +3,8 @@
 name: Qixin Wang
 title: Ph.D. Student · National University of Singapore
 photo: photo.jpg            # 放在 src/assets/ 里
-emails:                     # 可以写多个，第一个也用在顶栏的 Email 链接
+emails:                     # 左侧栏显示为 "Email me"，用第一个
   - siaqxwang@u.nus.edu
-  - sharleneqxw@gmail.com
 scholar: https://scholar.google.com/citations?user=Cbf_E3oAAAAJ
 linkedin: https://www.linkedin.com/in/sqxw/
 cv: cv.pdf                  # 放在 public/ 里；留空则不显示 CV 按钮

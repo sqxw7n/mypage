@@ -1,23 +1,19 @@
-/* 字体：Times New Roman（系统自带，无需加载）；中文用系统宋体搭配 */
-/* 配色：纯白底，正文中性黑灰，只有重点文字（链接、当前菜单、标签）用紫色 */
+/* 字体：系统自带的普通黑体（Mac：苹方 / Helvetica；Windows：微软雅黑 / Segoe UI） */
+/* 配色：极浅的紫色底（接近白，只隐约带一点紫），正文中性黑灰，只有重点文字（链接、当前菜单、标签）用紫色 */
 :root {
-  --bg: #ffffff;
+  --bg: #fbfaff;
   --fg: #1a1a1a;
   --soft: #4a4a4a;
   --muted: #8a8a8a;
-  --line: #ececec;
-  --ph: #f3f3f3;
+  --line: #ebe8f4;
+  --ph: #f1eff8;
   --accent: #4b2fa0;
   --accent-soft: rgba(75, 47, 160, 0.07);
   --accent-mid: rgba(75, 47, 160, 0.25);
 
-  --font: 'Times New Roman', Times, 'Songti SC', 'STSong', 'SimSun', serif;
-  --side: 0px;
+  --font: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
   --gutter: clamp(18px, 4vw, 48px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
-}
-@media (min-width: 960px) {
-  :root { --side: 0px; } /* 侧栏宽度改由 .page 的两栏布局控制 */
 }
 
 *,
@@ -34,7 +30,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.7;
   background: var(--bg);
   color: var(--fg);

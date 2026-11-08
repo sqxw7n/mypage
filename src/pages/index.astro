@@ -54,7 +54,7 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' 
         <Image src={asset('', me.photo)} alt={me.name} width={320} format="webp" quality={82} loading="eager" />
       </div>
       <ul class="links">
-        {me.emails.map((e) => <li><a href={`mailto:${e}`}>{e}</a></li>)}
+        {me.emails[0] && <li><a href={`mailto:${me.emails[0]}`}>Email me</a></li>}
         {me.scholar && <li><a href={me.scholar} target="_blank" rel="noopener">Google Scholar</a></li>}
         {me.linkedin && <li><a href={me.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>}
         {cvHref && <li><a href={cvHref} target="_blank" rel="noopener">CV</a></li>}
@@ -160,7 +160,7 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' 
         </ul>
       </section>
 
-      <footer class="foot muted">© {now.getFullYear()} {me.name}</footer>
+      <div class="end"></div>
     </main>
     </div>
 
@@ -219,11 +219,23 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' 
         open = document.querySelector<HTMLElement>(`[data-modal="${b.dataset.project}"]`)!;
         open.hidden = false;
         open.scrollTop = 0;
+        open.querySelector('.modal-head')!.classList.remove('hide');
         html.classList.add('lock');
       }));
-      $$('[data-modal]').forEach((m) => m.addEventListener('click', (e) => {
-        if (e.target === m || (e.target as HTMLElement).closest('[data-close]')) close();
-      }));
+      $$('[data-modal]').forEach((m) => {
+        m.addEventListener('click', (e) => {
+          if (e.target === m || (e.target as HTMLElement).closest('[data-close]')) close();
+        });
+        // 弹窗里往下看图时收起标题栏，往上滑时出现
+        const head = m.querySelector<HTMLElement>('.modal-head')!;
+        let last = 0;
+        m.addEventListener('scroll', () => {
+          const y = m.scrollTop, dy = y - last;
+          if (Math.abs(dy) < 6) return;
+          head.classList.toggle('hide', dy > 0 && y > 120);
+          last = y;
+        }, { passive: true });
+      });
 
       // 手机目录
       const sheet = document.querySelector<HTMLElement>('[data-sheet]')!;
@@ -244,7 +256,7 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' 
     margin: 0 auto;
     padding: 0 var(--gutter);
   }
-  .side { padding-top: 48px; }
+  .side { position: relative; z-index: 5; padding-top: 48px; }
   .avatar { width: 120px; }
   .avatar :global(img) { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--ph); border-radius: 50%; }
   .links { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 4px; font-size: 13px; }
@@ -281,6 +293,7 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' 
     }
     .side {
       position: sticky;
+      z-index: 5;
       top: 0;
       height: 100vh;
       padding-top: 64px;
@@ -350,7 +363,7 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' 
   .card:hover .card-title { color: var(--accent); }
   .card-sub { display: block; font-size: 13px; line-height: 1.55; }
 
-  .foot { padding: 100px 0 32px; font-size: 12px; }
+  .end { height: 120px; } /* 页面底部留白 */
 
   /* 项目弹窗 */
   .modal { position: fixed; inset: 0; z-index: 80; overflow-y: auto; background: rgba(20, 20, 20, 0.45); padding: 6vh var(--gutter); }
@@ -368,6 +381,8 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' 
     background: rgba(255, 255, 255, 0.95);
     border-bottom: 1px solid var(--line);
   }
+  .modal-head { transition: transform 0.4s var(--ease); }
+  .modal-head.hide { transform: translateY(calc(-100% - 6vh)); }
   .modal-head h3 { margin: 0; font-size: 18px; font-weight: 600; }
   .modal-head p { margin: 2px 0 0; font-size: 13px; }
   .close { font-size: 13px; color: var(--soft); }
@@ -378,7 +393,7 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' 
   :global(html.lock) { overflow: hidden; }
 
   /* 手机目录 */
-  .sheet { position: fixed; inset: 0; z-index: 70; background: #fff; padding: 80px var(--gutter); }
+  .sheet { position: fixed; inset: 0; z-index: 70; background: var(--bg); padding: 80px var(--gutter); }
   .sheet[hidden] { display: none; }
   .sheet-close { position: absolute; top: 20px; right: var(--gutter); }
   .sheet ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; font-size: 22px; font-weight: 600; }
