@@ -9,7 +9,7 @@ const about = (await getEntry('about', 'about'))!;
 const { Content: Intro } = await render(about);
 const me = about.data;
 
-const pubs = (await getCollection('publications')).map((p) => p.data && { id: p.id, ...p.data });
+const pubs = (await getCollection('publications')).map((p) => ({ id: p.id, ...p.data }));
 const acts = (await getCollection('activities')).map((a) => ({ id: a.id, ...a.data }));
 const projects = (await getCollection('projects')).map((p) => ({ id: p.id, ...p.data }));
 
@@ -22,6 +22,7 @@ const authorsHtml = (s: string) =>
 const pdfHref = (pdf: string) => (/^https?:/.test(pdf) ? pdf : `${base}papers/${pdf}`);
 const cvHref = me.cv ? (/^https?:/.test(me.cv) ? me.cv : `${base}${me.cv}`) : '';
 
+// 右上角的更新时间：每次构建自动写入当月
 const now = new Date();
 const lastUpdate = `${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()}`;
 
@@ -30,9 +31,8 @@ const sections = [
   { id: 'works', label: 'Selected Works' },
   { id: 'activities', label: 'Activities' },
   { id: 'projects', label: 'Projects' },
-  ...(cvHref ? [{ id: 'cv', label: 'CV' }] : []),
 ];
-const linkLabel = { paper: 'Paper', pdf: 'PDF', project: 'Project', code: 'Code' } as const;
+const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' } as const;
 ---
 
 <!doctype html>
@@ -46,63 +46,56 @@ const linkLabel = { paper: 'Paper', pdf: 'PDF', project: 'Project', code: 'Code'
     <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>
-    <!-- 顶栏：半透明毛玻璃，往下滑收起、往上滑出现 -->
-    <header class="top" data-top>
-      <a href="#about" class="name">{me.name}</a>
-      <nav class="contact">
-        {me.emails[0] && <a href={`mailto:${me.emails[0]}`}>Email</a>}
-        {me.scholar && <a href={me.scholar} target="_blank" rel="noopener">Google Scholar</a>}
-        {cvHref && <a href={cvHref} target="_blank" rel="noopener">CV</a>}
-        <button type="button" class="menu-btn" data-menu-open>Menu</button>
+    <!-- 左侧栏：头像 → 联系方式 → 菜单 -->
+    <aside class="side">
+      <div class="avatar">
+        <Image src={asset('', me.photo)} alt={me.name} width={320} format="webp" quality={82} loading="eager" />
+      </div>
+      <ul class="links">
+        {me.emails.map((e) => <li><a href={`mailto:${e}`}>{e}</a></li>)}
+        {me.scholar && <li><a href={me.scholar} target="_blank" rel="noopener">Google Scholar</a></li>}
+        {cvHref && <li><a href={cvHref} target="_blank" rel="noopener">CV</a></li>}
+      </ul>
+      <nav class="menu" aria-label="Sections">
+        <ol>
+          {sections.map((s) => <li><a href={`#${s.id}`} data-menu={s.id}>{s.label}</a></li>)}
+        </ol>
       </nav>
-    </header>
+    </aside>
 
-    <!-- 左侧悬浮目录 -->
-    <nav class="rail" aria-label="Sections">
-      <ol>
-        {sections.map((s, i) => (
-          <li><a href={`#${s.id}`} data-rail={s.id}><span class="n">{String(i + 1).padStart(2, '0')}</span>{s.label}</a></li>
-        ))}
-      </ol>
-    </nav>
+    <!-- 手机：右上角的菜单按钮 -->
+    <button type="button" class="menu-btn" data-menu-open>Menu</button>
 
     <main>
-      <!-- About -->
-      <section id="about" class="sec about" data-sec>
-        <div class="photo reveal">
-          <Image src={asset('', me.photo)} alt={me.name} width={480} format="webp" quality={82} loading="eager" />
-        </div>
-        <div class="intro">
-          <h1 class="reveal">{me.name}</h1>
-          {me.title && <p class="role muted reveal">{me.title}</p>}
-          <p class="contacts reveal">
-            {me.emails.map((e) => <a href={`mailto:${e}`}>{e}</a>)}
-            {me.scholar && <a href={me.scholar} target="_blank" rel="noopener">Google Scholar</a>}
-          </p>
-          <div class="prose reveal"><Intro /></div>
+      <p class="updated muted">Last updated {lastUpdate}</p>
 
-          <h2 class="label sub">Education</h2>
-          <ul class="edu">
-            {me.education.map((e) => (
-              <li class="reveal">
-                <div>
-                  <b>{e.school}</b>
-                  <span class="d">{e.degree}</span>
-                  {e.note && <span class="muted d">{e.note}</span>}
-                </div>
-                <div class="right muted">
-                  <span>{e.years}</span>
-                  {e.place && <span>{e.place}</span>}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <!-- About -->
+      <section id="about" class="sec" data-sec>
+        <h1 class="reveal">🌈 Hi, I'm {me.name}（王琦鑫）!</h1>
+        {me.title && <p class="role muted reveal">{me.title}</p>}
+        <div class="prose reveal"><Intro /></div>
+
+        <h2 class="sub">Education</h2>
+        <ul class="edu">
+          {me.education.map((e) => (
+            <li class="reveal">
+              <div>
+                <b>{e.school}</b>
+                <span class="d">{e.degree}</span>
+                {e.note && <span class="muted d">{e.note}</span>}
+              </div>
+              <div class="right muted">
+                <span>{e.years}</span>
+                {e.place && <span>{e.place}</span>}
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <!-- Selected Works -->
       <section id="works" class="sec" data-sec>
-        <h2 class="sec-title"><span class="n muted">02</span>Selected Works</h2>
+        <h2 class="sec-title">Selected Works</h2>
         <ol class="pubs">
           {pubs.map((p) => (
             <li class="pub reveal">
@@ -116,10 +109,10 @@ const linkLabel = { paper: 'Paper', pdf: 'PDF', project: 'Project', code: 'Code'
                 <p class="authors" set:html={authorsHtml(p.authors)} />
                 <p class="meta">
                   <span class="tag">{p.venue}</span>
-                  {p.status && <span class="tag soft">{p.status}</span>}
+                  {p.status && <span class="tag plain">{p.status}</span>}
                 </p>
                 {Object.keys(p.links).length > 0 && (
-                  <p class="links">
+                  <p class="plinks">
                     {(Object.keys(linkLabel) as (keyof typeof linkLabel)[]).filter((k) => p.links[k]).map((k) => (
                       <a href={k === 'pdf' ? pdfHref(p.links[k]!) : p.links[k]} target="_blank" rel="noopener">{linkLabel[k]}</a>
                     ))}
@@ -133,10 +126,10 @@ const linkLabel = { paper: 'Paper', pdf: 'PDF', project: 'Project', code: 'Code'
 
       <!-- Activities -->
       <section id="activities" class="sec" data-sec>
-        <h2 class="sec-title"><span class="n muted">03</span>Activities</h2>
+        <h2 class="sec-title">Activities</h2>
         {groups.map((g) => (
           <div class="act-group">
-            <h3 class="label sub">{g.name}</h3>
+            <h3 class="sub">{g.name}</h3>
             <ul class="acts">
               {g.items.map((a) => (
                 <li class="reveal"><span>{a.title}</span><span class="muted date">{a.date}</span></li>
@@ -148,7 +141,7 @@ const linkLabel = { paper: 'Paper', pdf: 'PDF', project: 'Project', code: 'Code'
 
       <!-- Projects -->
       <section id="projects" class="sec" data-sec>
-        <h2 class="sec-title"><span class="n muted">04</span>Projects</h2>
+        <h2 class="sec-title">Projects</h2>
         <ul class="projects">
           {projects.map((p) => (
             <li class="reveal">
@@ -164,16 +157,7 @@ const linkLabel = { paper: 'Paper', pdf: 'PDF', project: 'Project', code: 'Code'
         </ul>
       </section>
 
-      {cvHref && (
-        <section id="cv" class="sec" data-sec>
-          <h2 class="sec-title"><span class="n muted">05</span>CV</h2>
-          <p class="cv-row">
-            <a class="btn" href={cvHref} target="_blank" rel="noopener">Download CV (PDF)</a>
-          </p>
-        </section>
-      )}
-
-      <footer class="foot muted">Last update {lastUpdate}</footer>
+      <footer class="foot muted">© {now.getFullYear()} {me.name}</footer>
     </main>
 
     <!-- 项目详情弹窗（每个项目一份，默认隐藏） -->
@@ -217,27 +201,12 @@ const linkLabel = { paper: 'Paper', pdf: 'PDF', project: 'Project', code: 'Code'
       }), { rootMargin: '0px 0px -6% 0px' });
       $$('.reveal').forEach((el) => io.observe(el));
 
-      // 左侧目录：当前所在的板块高亮
+      // 左侧菜单：当前所在的板块高亮
       const spy = new IntersectionObserver((es) => es.forEach((e) => {
         if (!e.isIntersecting) return;
-        $$('[data-rail]').forEach((a) => a.classList.toggle('active', a.dataset.rail === (e.target as HTMLElement).id));
+        $$('[data-menu]').forEach((a) => a.classList.toggle('active', a.dataset.menu === (e.target as HTMLElement).id));
       }), { rootMargin: '-40% 0px -55% 0px' });
       $$('[data-sec]').forEach((s) => spy.observe(s));
-
-      // 顶栏：往下滑收起，往上滑出现
-      const top = document.querySelector<HTMLElement>('[data-top]')!;
-      let lastY = scrollY, ticking = false;
-      addEventListener('scroll', () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          ticking = false;
-          const dy = scrollY - lastY;
-          if (Math.abs(dy) < 6 || html.classList.contains('lock')) return;
-          top.classList.toggle('hide', dy > 0 && scrollY > top.offsetHeight);
-          lastY = scrollY;
-        });
-      }, { passive: true });
 
       // 项目弹窗
       let open: HTMLElement | null = null;
@@ -265,92 +234,74 @@ const linkLabel = { paper: 'Paper', pdf: 'PDF', project: 'Project', code: 'Code'
 </html>
 
 <style>
-  /* ── 顶栏 ── */
-  .top {
-    position: fixed;
-    inset: 0 0 auto 0;
-    z-index: 40;
-    height: var(--header);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 var(--gutter);
-    background: color-mix(in srgb, var(--bg) 72%, transparent);
-    -webkit-backdrop-filter: blur(16px) saturate(1.2);
-    backdrop-filter: blur(16px) saturate(1.2);
-    border-bottom: 1px solid var(--line);
-    transition: transform 0.45s var(--ease);
+  /* ── 左侧栏 ── */
+  .side {
+    padding: 48px var(--gutter) 0;
   }
-  .top.hide { transform: translateY(-100%); }
-  .name { font-weight: 500; letter-spacing: 0.04em; }
-  .contact { display: flex; align-items: center; gap: 28px; }
-  .contact a, .menu-btn {
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--soft);
-    transition: color 0.3s;
-  }
-  .contact a:hover { color: var(--accent); }
-  .menu-btn { display: none; }
+  .avatar { width: 120px; }
+  .avatar :global(img) { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--ph); border-radius: 50%; }
+  .links { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 4px; font-size: 13px; }
+  .links a { color: var(--accent); word-break: break-all; }
+  .links a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-  /* ── 左侧目录 ── */
-  .rail { position: fixed; z-index: 30; top: 32vh; left: var(--gutter); display: none; }
-  .rail ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-  .rail a {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
+  .menu { display: none; margin-top: 56px; }
+  .menu ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .menu a { font-size: 14px; color: var(--soft); transition: color 0.3s; }
+  .menu a:hover { color: var(--fg); }
+  .menu a.active { color: var(--accent); font-weight: 600; }
+
+  .menu-btn {
+    position: fixed;
+    top: 16px;
+    right: var(--gutter);
+    z-index: 40;
+    padding: 6px 12px;
     font-size: 13px;
     color: var(--soft);
-    transition: color 0.3s;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--line);
   }
-  .rail .n { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; transition: color 0.3s; }
-  .rail a:hover { color: var(--fg); }
-  .rail a.active,
-  .rail a.active .n { color: var(--accent); }
 
   main {
-    max-width: calc(var(--rail) + 940px);
-    margin: 0 auto;
-    padding: 0 var(--gutter) 0 calc(var(--rail) + var(--gutter));
+    position: relative;
+    max-width: calc(var(--side) + 900px);
+    padding: 0 var(--gutter) 0 calc(var(--side) + var(--gutter));
   }
+  .updated { margin: 0; padding-top: 24px; text-align: right; font-size: 12px; }
+
   @media (min-width: 960px) {
-    .rail { display: block; }
-    main { margin: 0; }
+    .side {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--side);
+      height: 100vh;
+      padding: 64px 28px 0 var(--gutter);
+      overflow-y: auto;
+    }
+    .menu { display: block; }
+    .menu-btn { display: none; }
   }
 
   /* ── 板块 ── */
-  .sec { padding-top: clamp(72px, 12vh, 140px); }
+  .sec { padding-top: clamp(56px, 9vh, 96px); }
+  #about { padding-top: 24px; }
   .sec-title {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    margin: 0 0 32px;
+    margin: 0 0 28px;
     padding-top: 14px;
     border-top: 1px solid var(--line);
     font-size: 22px;
-    font-weight: 500;
-    letter-spacing: 0.01em;
+    font-weight: 600;
   }
-  .sec-title .n { font-size: 12px; font-weight: 400; letter-spacing: 0.1em; }
-  .sub { margin: 40px 0 14px; color: var(--muted); }
+  .sub { margin: 36px 0 12px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 
   /* About */
-  .about {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 48px;
-    padding-top: calc(var(--header) + clamp(56px, 12vh, 120px));
-  }
-  .photo :global(img) { width: 100%; aspect-ratio: 1; object-fit: cover; background: var(--ph); }
-  h1 { margin: 0 0 4px; font-size: clamp(34px, 4vw, 46px); font-weight: 500; letter-spacing: 0.01em; line-height: 1.1; }
-  .role { margin: 0 0 12px; font-size: 13px; letter-spacing: 0.06em; }
-  .contacts { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0 0 26px; font-size: 13px; }
-  .contacts a { color: var(--accent); border-bottom: 1px solid var(--accent-mid); }
-  .contacts a:hover { border-color: var(--accent); }
+  h1 { margin: 0 0 6px; font-size: clamp(26px, 3vw, 34px); font-weight: 600; line-height: 1.3; }
+  .role { margin: 0 0 22px; font-size: 14px; }
   .prose :global(p) { margin: 0 0 14px; color: var(--soft); }
   .prose :global(strong) { color: var(--fg); }
+  .prose :global(a) { color: var(--accent); }
+  .prose :global(a:hover) { text-decoration: underline; text-underline-offset: 3px; }
 
   .edu { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
   .edu li { display: flex; justify-content: space-between; gap: 20px; }
@@ -360,87 +311,44 @@ const linkLabel = { paper: 'Paper', pdf: 'PDF', project: 'Project', code: 'Code'
   .edu .right { display: flex; flex-direction: column; align-items: flex-end; font-size: 13px; white-space: nowrap; }
 
   /* Selected Works */
-  .pubs { list-style: none; margin: 0; padding: 0; display: grid; gap: 34px; }
-  .pub { display: grid; grid-template-columns: 200px 1fr; gap: 28px; align-items: start; }
-  .thumb { aspect-ratio: 4 / 3; overflow: hidden; background: var(--surface); border: 1px solid var(--line); }
+  .pubs { list-style: none; margin: 0; padding: 0; display: grid; gap: 32px; }
+  .pub { display: grid; grid-template-columns: 190px 1fr; gap: 26px; align-items: start; }
+  .thumb { aspect-ratio: 4 / 3; overflow: hidden; background: var(--bg); border: 1px solid var(--line); }
   .thumb :global(img) { width: 100%; height: 100%; object-fit: cover; }
-  .thumb.empty { display: flex; align-items: center; justify-content: center; background: var(--accent-soft); border-color: transparent; }
-  .venue-mark { font-size: 13px; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; }
-  .pub h3 { margin: 0 0 6px; font-size: 16px; font-weight: 500; line-height: 1.45; }
-  .authors { margin: 0 0 10px; font-size: 13.5px; color: var(--soft); }
-  .authors :global(b) { color: var(--fg); font-weight: 600; }
-  .meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; }
-  .tag {
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    padding: 2px 8px;
-    color: var(--accent);
-    background: var(--accent-soft);
-  }
-  .tag.soft { color: var(--soft); background: transparent; border: 1px solid var(--line); }
-  .links { display: flex; flex-wrap: wrap; gap: 18px; margin: 0; }
-  .links a {
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    border-bottom: 1px solid var(--accent-mid);
-    transition: border-color 0.3s;
-  }
-  .links a:hover { border-color: var(--accent); }
+  .thumb.empty { display: flex; align-items: center; justify-content: center; background: var(--ph); border-color: transparent; }
+  .venue-mark { font-size: 13px; font-weight: 600; color: var(--muted); }
+  .pub h3 { margin: 0 0 6px; font-size: 16px; font-weight: 600; line-height: 1.45; }
+  .authors { margin: 0 0 8px; font-size: 14px; color: var(--soft); }
+  .authors :global(b) { color: var(--fg); }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; }
+  .tag { font-size: 12px; font-weight: 600; padding: 1px 8px; color: var(--accent); background: var(--accent-soft); }
+  .tag.plain { font-weight: 400; color: var(--soft); background: var(--ph); }
+  .plinks { display: flex; flex-wrap: wrap; gap: 16px; margin: 0; font-size: 13px; }
+  .plinks a { color: var(--accent); }
+  .plinks a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   /* Activities */
   .act-group:first-of-type .sub { margin-top: 0; }
   .acts { list-style: none; margin: 0; padding: 0; }
-  .acts li {
-    display: flex;
-    justify-content: space-between;
-    gap: 24px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 14px;
-  }
+  .acts li { display: flex; justify-content: space-between; gap: 24px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
   .acts .date { white-space: nowrap; font-size: 13px; }
 
   /* Projects */
-  .projects { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 28px; }
+  .projects { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 26px; }
   .card { display: block; width: 100%; text-align: left; }
   .cover { display: block; aspect-ratio: 16 / 9; overflow: hidden; background: var(--ph); }
   .cover :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
   .card:hover .cover :global(img) { transform: scale(1.03); }
-  .card-title { display: block; margin-top: 12px; font-size: 15px; font-weight: 500; }
+  .card-title { display: block; margin-top: 10px; font-size: 15px; font-weight: 600; }
   .card:hover .card-title { color: var(--accent); }
   .card-sub { display: block; font-size: 13px; line-height: 1.55; }
 
-  /* CV */
-  .cv-row { margin: 0; }
-  .btn {
-    display: inline-block;
-    padding: 10px 22px;
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid var(--accent-mid);
-    transition: background-color 0.3s, border-color 0.3s;
-  }
-  .btn:hover { background: var(--accent-soft); border-color: var(--accent); }
-
-  .foot { padding: 120px 0 36px; font-size: 12px; letter-spacing: 0.08em; }
+  .foot { padding: 100px 0 32px; font-size: 12px; }
 
   /* 项目弹窗 */
-  .modal {
-    position: fixed;
-    inset: 0;
-    z-index: 80;
-    overflow-y: auto;
-    background: color-mix(in srgb, var(--fg) 40%, transparent);
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    padding: 6vh var(--gutter);
-  }
+  .modal { position: fixed; inset: 0; z-index: 80; overflow-y: auto; background: rgba(20, 20, 20, 0.45); padding: 6vh var(--gutter); }
   .modal[hidden] { display: none; }
-  .modal-box { max-width: 900px; margin: 0 auto; background: var(--surface); }
+  .modal-box { max-width: 900px; margin: 0 auto; background: #fff; }
   .modal-head {
     position: sticky;
     top: 0;
@@ -449,15 +357,13 @@ const linkLabel = { paper: 'Paper', pdf: 'PDF', project: 'Project', code: 'Code'
     justify-content: space-between;
     align-items: flex-start;
     gap: 24px;
-    padding: 20px 24px;
-    background: color-mix(in srgb, var(--surface) 88%, transparent);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    padding: 18px 24px;
+    background: rgba(255, 255, 255, 0.95);
     border-bottom: 1px solid var(--line);
   }
-  .modal-head h3 { margin: 0; font-size: 18px; font-weight: 500; }
+  .modal-head h3 { margin: 0; font-size: 18px; font-weight: 600; }
   .modal-head p { margin: 2px 0 0; font-size: 13px; }
-  .close { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft); }
+  .close { font-size: 13px; color: var(--soft); }
   .close:hover { color: var(--accent); }
   .modal-desc { padding: 20px 24px 0; margin: 0; color: var(--soft); }
   .modal-imgs :global(img) { width: 100%; }
@@ -465,17 +371,13 @@ const linkLabel = { paper: 'Paper', pdf: 'PDF', project: 'Project', code: 'Code'
   :global(html.lock) { overflow: hidden; }
 
   /* 手机目录 */
-  .sheet { position: fixed; inset: 0; z-index: 70; background: var(--bg); padding: calc(var(--header) + 6vh) var(--gutter); }
+  .sheet { position: fixed; inset: 0; z-index: 70; background: #fff; padding: 80px var(--gutter); }
   .sheet[hidden] { display: none; }
-  .sheet-close { position: absolute; top: 0; right: var(--gutter); height: var(--header); }
-  .sheet ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; font-size: 24px; font-weight: 500; }
+  .sheet-close { position: absolute; top: 20px; right: var(--gutter); }
+  .sheet ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; font-size: 22px; font-weight: 600; }
 
   @media (max-width: 760px) {
-    .contact a { display: none; }
-    .menu-btn { display: block; }
-    .about { grid-template-columns: 1fr; gap: 28px; }
-    .photo { width: 160px; }
-    .pub { grid-template-columns: 1fr; gap: 14px; }
+    .pub { grid-template-columns: 1fr; gap: 12px; }
     .thumb { max-width: 320px; }
     .projects { grid-template-columns: 1fr; }
     .edu li, .acts li { flex-direction: column; gap: 2px; }
