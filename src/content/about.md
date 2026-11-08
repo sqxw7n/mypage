@@ -27,7 +27,7 @@ education:
     years: 2017 – 2021
 ---
 
-I am a first-year Ph.D. student in Electrical and Computer Engineering at the [National University of Singapore](https://nus.edu.sg). I have just begun exploring **affective avatars**, **human–computer interaction**, and **interaction in virtual reality** — how embodied, emotionally expressive agents and immersive environments can make human–computer interaction more natural, expressive, and engaging.
+I am a first-year Ph.D. student in Electrical and Computer Engineering at the [National University of Singapore](https://nus.edu.sg). I have just begun exploring **affective avatars**, **human-computer interaction**, and **interaction in virtual reality**. I am interested in how embodied, emotionally expressive agents and immersive environments can make human-computer interaction more natural, expressive, and engaging.
 
 Before that, I received my master's degree from the [Department of Computer Science and Technology](https://www.cs.tsinghua.edu.cn/csen/) at [Tsinghua University](https://www.tsinghua.edu.cn/en/), advised by [Professor Jia Jia](https://hcsi.cs.tsinghua.edu.cn). My research there centered on human-centered AI and multimodal interaction, including vision-context-aware expressive speech synthesis, voice design for avatars, and accessibility. My master's thesis designed a video accessibility system for blind and low-vision (BLV) users based on multimodal agent collaboration.
 

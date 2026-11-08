@@ -2,7 +2,7 @@
 # 活动、获奖、展览、经历。新的加在对应分组的最上面。
 #
 #   id:    唯一的英文短名
-#   group: 分组，页面上按这个顺序显示：Awards / Exhibitions / Experience
+#   group: 分组名（如 Awards、Exhibitions、Experience），页面按第一次出现的顺序显示
 #   title: 内容
 #   date:  时间（随便写格式，如 "Nov. 2022"、"2023 – Present"）
 # ─────────────────────────────────────────────────────────────
@@ -42,15 +42,3 @@
   group: Awards
   title: Excellent Paper Presentation, the 4th HEED International Collegiate Conference of China
   date: May 2018
-
-# ── Exhibitions ──
-- id: dream-visualization
-  group: Exhibitions
-  title: Dream-Visualization Art Community — Asia Digital Art Exhibition; Taobao Maker Festival
-  date: 2022
-
-# ── Experience ──
-- id: thu-tech-service
-  group: Experience
-  title: Member, Technical Service Team, Tsinghua University
-  date: Mar. 2018 – Jun. 2023
