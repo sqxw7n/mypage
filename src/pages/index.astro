@@ -15,6 +15,10 @@ const projects = (await getCollection('projects')).map((p) => ({ id: p.id, ...p.
 
 // 活动按分组显示，分组顺序以 yaml 里第一次出现的顺序为准
 const groups = [...new Set(acts.map((a) => a.group))].map((g) => ({ name: g, items: acts.filter((a) => a.group === g) }));
+// Activities 默认只显示这一年及以后的条目，更早的收在 "Show more" 里（年份从 date 里自动识别）
+const SHOW_FROM_YEAR = 2022;
+const yearOf = (d: string) => Number(d.match(/(19|20)\d{2}/g)?.at(-1) ?? 9999);
+const hasOld = acts.some((a) => yearOf(a.date) < SHOW_FROM_YEAR);
 
 // 作者里自己的名字加粗
 const authorsHtml = (s: string) =>
@@ -32,7 +36,7 @@ const sections = [
   { id: 'activities', label: 'Activities' },
   { id: 'projects', label: 'Projects' },
 ];
-const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' } as const;
+const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Demo', code: 'Code' } as const;
 ---
 
 <!doctype html>
@@ -130,16 +134,19 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' 
       <!-- Activities -->
       <section id="activities" class="sec" data-sec>
         <h2 class="sec-title">Activities</h2>
-        {groups.map((g) => (
-          <div class="act-group">
-            <h3 class="sub">{g.name}</h3>
-            <ul class="acts">
-              {g.items.map((a) => (
-                <li class="reveal"><span>{a.title}</span><span class="muted date">{a.date}</span></li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <div class="acts-wrap" data-acts>
+          {groups.map((g) => (
+            <div class="act-group">
+              {groups.length > 1 && <h3 class="sub">{g.name}</h3>}
+              <ul class="acts">
+                {g.items.map((a) => (
+                  <li class:list={['reveal', { old: yearOf(a.date) < SHOW_FROM_YEAR }]}><span>{a.title}</span><span class="muted date">{a.date}</span></li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        {hasOld && <button type="button" class="more" data-more aria-expanded="false">Show more</button>}
       </section>
 
       <!-- Projects -->
@@ -211,6 +218,16 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' 
         $$('[data-menu]').forEach((a) => a.classList.toggle('active', a.dataset.menu === (e.target as HTMLElement).id));
       }), { rootMargin: '-40% 0px -55% 0px' });
       $$('[data-sec]').forEach((s) => spy.observe(s));
+
+      // Activities：Show more / Show less
+      const more = document.querySelector<HTMLButtonElement>('[data-more]');
+      more?.addEventListener('click', () => {
+        const wrap = document.querySelector<HTMLElement>('[data-acts]')!;
+        const openNow = wrap.classList.toggle('expanded');
+        more.textContent = openNow ? 'Show less' : 'Show more';
+        more.setAttribute('aria-expanded', String(openNow));
+        if (openNow) wrap.querySelectorAll('.old').forEach((el) => el.classList.add('in'));
+      });
 
       // 项目弹窗
       let open: HTMLElement | null = null;
@@ -352,6 +369,13 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Project', code: 'Code' 
   .acts { list-style: none; margin: 0; padding: 0; }
   .acts li { display: flex; justify-content: space-between; gap: 24px; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
   .acts .date { white-space: nowrap; font-size: 13px; }
+  .acts-wrap:not(.expanded) .old { display: none; }
+  .more {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--accent);
+  }
+  .more:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   /* Projects */
   .projects { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 26px; }

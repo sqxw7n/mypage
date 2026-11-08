@@ -1,7 +1,11 @@
-/* 字体：系统自带的普通黑体（Mac：苹方 / Helvetica；Windows：微软雅黑 / Segoe UI） */
+/* 字体：Tomorrow（与摄影网站一致的设计感字体）。300 = 正文，400 / 500 / 600 = 强调和标题 */
+@import '@fontsource/tomorrow/300.css';
+@import '@fontsource/tomorrow/400.css';
+@import '@fontsource/tomorrow/500.css';
+@import '@fontsource/tomorrow/600.css';
 /* 配色：极浅的紫色底（接近白，只隐约带一点紫），正文中性黑灰，只有重点文字（链接、当前菜单、标签）用紫色 */
 :root {
-  --bg: #fbfaff;
+  --bg: #fdfcff;
   --fg: #1a1a1a;
   --soft: #4a4a4a;
   --muted: #8a8a8a;
@@ -11,7 +15,7 @@
   --accent-soft: rgba(75, 47, 160, 0.07);
   --accent-mid: rgba(75, 47, 160, 0.25);
 
-  --font: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
+  --font: 'Tomorrow', -apple-system, 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
   --gutter: clamp(18px, 4vw, 48px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -31,6 +35,7 @@ body {
   margin: 0;
   font-family: var(--font);
   font-size: 15px;
+  font-weight: 300;
   line-height: 1.7;
   background: var(--bg);
   color: var(--fg);

@@ -11,7 +11,7 @@
 #   links:   可选，有哪个写哪个
 #     paper:   论文页面（DOI / arXiv / 出版社）
 #     pdf:     PDF 文件名，放在 public/papers/ 里；或直接写完整网址
-#     project: 项目 / Demo 页面
+#     project: Demo 页面（显示为 "Demo"）
 #     code:    代码 / 数据集
 # ─────────────────────────────────────────────────────────────
 
