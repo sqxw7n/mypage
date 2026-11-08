@@ -15,7 +15,7 @@ education:
   - school: National University of Singapore
     degree: Doctor of Philosophy — Electrical & Computer Engineering
     place: Singapore
-    years: 2026 – 2030
+    years: 2026 – Present
   - school: Tsinghua University
     degree: Master of Engineering — Computer Science and Technology
     note: Overall GPA 3.91 / 4.0
