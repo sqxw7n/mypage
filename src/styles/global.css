@@ -17,7 +17,7 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 @media (min-width: 960px) {
-  :root { --side: 250px; }
+  :root { --side: 0px; } /* 侧栏宽度改由 .page 的两栏布局控制 */
 }
 
 *,
