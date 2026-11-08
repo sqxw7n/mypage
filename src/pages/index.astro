@@ -35,7 +35,7 @@ const sections = [
   { id: 'education', label: 'Education' },
   { id: 'works', label: 'Selected Works' },
   { id: 'activities', label: 'Activities' },
-  { id: 'projects', label: 'Projects' },
+  { id: 'designs', label: 'Designs' },
 ];
 const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Demo', code: 'Code' } as const;
 ---
@@ -153,9 +153,10 @@ const linkLabel = { paper: 'Link', pdf: 'PDF', project: 'Demo', code: 'Code' } a
         {hasOld && <button type="button" class="more" data-more aria-expanded="false">Show more</button>}
       </section>
 
-      <!-- Projects -->
-      <section id="projects" class="sec" data-sec>
-        <h2 class="sec-title">Projects</h2>
+      <!-- Designs：过去的 HCI 设计作品（数据在 src/content/projects.yaml） -->
+      <section id="designs" class="sec" data-sec>
+        <h2 class="sec-title">Designs</h2>
+        <span id="projects" class="anchor-alias" aria-hidden="true"></span><!-- 旧链接 #projects（简历里用到）也定位到这里 -->
         <ul class="projects">
           {projects.map((p) => (
             <li class="reveal">

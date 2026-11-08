@@ -8,7 +8,7 @@
 |---|---|
 | 加一篇论文 | `src/content/publications.yaml`：复制一段，改标题、作者、会议、年份、链接；配图放 `src/assets/papers/`，PDF 放 `public/papers/` |
 | 加获奖 / 展览 / 经历 | `src/content/activities.yaml` |
-| 加项目 | `src/content/projects.yaml`，图片放 `src/assets/projects/` |
+| 加设计作品（Designs） | `src/content/projects.yaml`，图片放 `src/assets/projects/` |
 | 改介绍、学历、邮箱、照片 | `src/content/about.md` |
 | 换 CV | 用新 PDF 覆盖 `public/cv.pdf`（Word 源文件在 `cv/`） |
 

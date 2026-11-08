@@ -73,16 +73,6 @@
     paper: https://dl.acm.org/doi/10.1145/3613905.3650822
     pdf: soulskipper-chiea2024.pdf
 
-- id: holosinger
-  title: "HoloSinger: Semantics and Music Driven Motion Generation with Octahedral Holographic Projection"
-  authors: Zeyu Jin, Zixuan Wang, Qixin Wang, Jia Jia, Ye Bai, Yi Zhao, Hao Li, Xiaorui Wang
-  venue: ACM MM 2023
-  year: 2023
-  image: holosinger.jpg
-  links:
-    paper: https://dl.acm.org/doi/10.1145/3581783.3612674
-    pdf: holosinger-mm2023.pdf
-
 - id: asiahaptics2022
   title: "Graphical Tactile Display Application: Design of Digital Braille Textbook and Initial Findings"
   authors: Yang Jiao, Qixin Wang, Yingqing Xu
@@ -93,18 +83,3 @@
   links:
     paper: https://link.springer.com/chapter/10.1007/978-3-031-46839-1_10
     pdf: tactile-display-asiahaptics2022.pdf
-
-- id: hhme2022
-  title: "Research on Haptic Graphic Displays: Digitized Braille Textbook Design"
-  authors: Yang Jiao, Qixin Wang, Yingqing Xu
-  venue: HHME-CHCI 2022
-  year: 2022
-  status: Poster · Best Paper Finalist
-  image: hhme.jpg
-
-- id: tasies2019
-  title: The Discussion on the Method about Using Interactive Installation Art in Psychotherapy
-  authors: Qixin Wang, Chong Cao, Jiayi Sun
-  venue: TASIES 2019
-  year: 2019
-  image: tasies.jpg
