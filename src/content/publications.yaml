@@ -22,14 +22,6 @@
   year: 2025
   status: Accepted
 
-- id: harmonivox
-  title: "HarmoniVox: Painting Voices to Match the Avatar's Soul"
-  authors: Songtao Zhou, Xiaoyu Qin, Yixuan Zhou, Qixin Wang, Zeyu Jin, Zixuan Wang, Zhiyong Wu, Jia Jia
-  venue: ACM MM 2025
-  year: 2025
-  links:
-    project: https://harmonivox.github.io/harmonivox/
-
 - id: v-cass
   title: "V-CASS: Vision-context-aware Expressive Speech Synthesis for Enhancing User Understanding of Videos"
   authors: Qixin Wang, Songtao Zhou, Zeyu Jin, Chenglin Guo, Shikun Sun, Xiaoyu Qin
